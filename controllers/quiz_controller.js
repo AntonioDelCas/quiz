@@ -12,6 +12,7 @@ exports.answer = function(reg, res){
         res.render('quizes/answer', {respuesta: 'Incorrecto'});
     }
 
+
 };
 
 
