@@ -8,11 +8,6 @@ router.get('/', function(req, res) {
     res.render('index', { title: 'Quiz' });
 });
 
-/* GET /quizes/author. */
-router.get('/author', function(req, res) {
-    res.render('author', {autor: 'Antonio Delgado'});
-});
-
 
 // Autoload de comando cn :quizId
 router.param('quizId', quizController.load);
@@ -22,6 +17,14 @@ router.param('quizId', quizController.load);
 router.get('/quizes',               quizController.index);
 router.get('/quizes/:quizId(\\d+)', quizController.show);
 router.get('/quizes/:quizId(\\d+)/answer', quizController.answer);
+
+
+
+/* GET /quizes/author. */
+router.get('/author', function(req, res) {
+    res.render('author', {autor: 'Antonio Delgado'});
+});
+
 
 
 /* GET /quizes/question. */
