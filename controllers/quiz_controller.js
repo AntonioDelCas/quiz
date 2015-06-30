@@ -35,7 +35,7 @@ exports.load = function(req, res, next, quizId){
                 next(new Error('No existe quizId=' + quizId));
             }
         }
-    )
+    ).cath(function(error){next(error);})
 };
 
 
@@ -51,9 +51,9 @@ exports.index = function(req, res){
 
 // GET /quizes/:id
 exports.show = function(reg, res){
-    models.Quiz.find(req.params.quizId).then(function(quiz){
+    //models.Quiz.find(req.params.quizId).then(function(quiz){
         res.render('quizes/show', {quiz: req.quiz});
-    })
+    //})
 };
 
 // GEt /quizes/:id/answer
