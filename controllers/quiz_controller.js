@@ -1,29 +1,6 @@
 var models = require('../models/models.js');
 
 
-/*
-// GET /quixes/question
-exports.question = function(reg, res){
-    models.Quiz.findAll().success(function(quiz){
-        res.render('quizes/question', {pregunta: quiz[0].pregunta});
-    })
-};
-
-
-// GET /quixes/answer
-exports.answer = function(reg, res){
-    models.Quiz.findAll().success(function(quiz){
-        if(reg.query.respuesta === quiz[0].respuesta){
-            res.render('quizes/answer', {respuesta: 'Correcto'});
-        } else {
-            res.render('quizes/answer', {respuesta: 'Incorrecto'});
-        }
-    })
-};
-*/
-
-
-
 // Autoload -factoriza el codigo si ruta incluye :quizId
 exports.load = function(req, res, next, quizId){
     models.Quiz.find(quizId).then(
@@ -31,11 +8,9 @@ exports.load = function(req, res, next, quizId){
             if(quiz){
                 req.quiz = quiz;
                 next();
-            } else {
-                next(new Error('No existe quizId=' + quizId));
-            }
+            } else { next(new Error('No existe quizId=' + quizId));}
         }
-    ).cath(function(error){next(error);})
+    ).cath(function(error){next(error);});
 };
 
 
