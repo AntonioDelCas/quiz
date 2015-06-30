@@ -18,17 +18,16 @@ exports.load = function(req, res, next, quizId){
 exports.index = function(req, res){
     models.Quiz.findAll().then(
         function(quizes){
-            res.render('quizes/index', {quizes: quizes});
-    }).catch(function(error){next(error);})
+            res.render('quizes/index.ejs', {quizes: quizes});
+    }
+    ).catch(function(error){next(error);})
 };
 
 
 
 // GET /quizes/:id
 exports.show = function(reg, res){
-    //models.Quiz.find(req.params.quizId).then(function(quiz){
         res.render('quizes/show', {quiz: req.quiz});
-    //})
 };
 
 // GEt /quizes/:id/answer
