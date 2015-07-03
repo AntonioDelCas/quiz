@@ -32,9 +32,23 @@ exports.load = function(req, res, next, quizId) {
     ).catch(function(error){next(error);})
 };*/
 exports.index = function(req, res) {
-    models.Quiz.findAll().then(
+
+    var querySql = {};
+    var textoBusqueda = '';
+    if( req.query.search === undefined ){
+        querySql = {order: 'pregunta ASC'};
+        textoBusqueda = 'Mostrando todas ...';
+    } else {
+        var search = '%' +  req.query.search.replace(/\s+/g,'%') + '%';
+        querySql = {where:['pregunta like?', search], order:'pregunta ASC'};
+        textoBusqueda = 'Filtrando por ' + req.query.search;
+
+    }
+
+    models.Quiz.findAll(querySql).then(
+    //models.Quiz.findAll().then(
         function(quizes) {
-            res.render('quizes/index', { quizes: quizes});
+            res.render('quizes/index', { quizes: quizes, busqueda: textoBusqueda});
         }
     ).catch(function(error) { next(error);})
 };
